@@ -1,0 +1,11 @@
+# POLISCOPE — developer tooling only (NOT contract runtime dependencies).
+# The contract has zero third-party dependencies: it runs on the legacy GenVM runner pinned in its header.
+#
+# Deployed generation: LEGACY runner py-genlayer:1jb45aa8... (RESEARCH §0b). Verified together on 2026-11-19:
+genlayer-test==0.29.2        # the version that matches the legacy runner. DO NOT use 0.30.0rc2 (regresses on legacy contracts)
+cloudpickle                  # required by direct_vm.check_pickling = True
+pytest>=9
+genvm-linter @ git+https://github.com/genlayerlabs/genvm-linter@main   # 0.11.1-rc.2; PyPI 0.11.0 cannot load newer layouts
+
+# Sandbox-only note: if genlayer-test's GenVM download returns 404, link the bundle the linter already cached:
+#   ln -s ~/.cache/genvm-linter/genvm-universal-v0.3.0-rc7.tar.xz ~/.cache/gltest-direct/
